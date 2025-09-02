@@ -18,23 +18,14 @@ while read LINE
 do
     rngName=$(shuf -i 10000-99999 -n 1)
     hash_name=$(printf ${rngName}${LINE} | sha256sum)
-    hash_array+=${rngName}${hash_name}
+    hash_array+=(${rngName}${hash_name})
 done < names
 
-for name in "${hash_array[@]}"
+printf "%s\n" "${hash_array[@]}"
+
+for i in "${!hash_array[@]}"
 do
-    # echo ${hash_array[$name]}
-    echo -- $name
+    hash_array[$i]="${hash_array[$i]//-/}"
 done
 
-# for name in names
-# do
-#     hash_array
-
-# done < hashed_names.csv
-
-
-
-# RNG 
-# rngName=$(shuf -i 10000-99999 -n 1)
-
+printf "%s\n" "${hash_array[@]}"
