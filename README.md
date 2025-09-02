@@ -1,7 +1,7 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/SPs4PNWX)
 # Lab 1 : CEG 3400 Intro to Cyber Security
 
-## Name:
+## Name: Aidan McGohan
 
 ### Task 1: Hashing
 
@@ -10,6 +10,9 @@
 Answer the following in this file:
 
 * How many unique users are in the data?
+
+42, I used `cat quiz_data.csv | awk -F "," '{print $1}' | uniq | wc -l` to print number of unique users, and subtract 1 for FLastName
+
 * How many salts did you create?
 * How many possible combinations will I need to try to figure out the secret ID
   of all students (assume I know all potential secret IDs and have your 
