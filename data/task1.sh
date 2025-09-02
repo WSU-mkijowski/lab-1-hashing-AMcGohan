@@ -9,6 +9,20 @@
 #
 # 4. Replace all instances of the unique identifier with the new RNG+hash ID
 
-rngName=$(shuf -i 10000-99999 -n 1)
+# Grab all unique ID and make a file containing them
+cat quiz_data.csv | awk -F ',' '{ print $1}' | uniq > names
 
-# cat quiz_data.csv | awk -F ',' '{ print $1}' | uniq
+#Take LINE and add the RNG number before it, hash it, then add the same number before the new hash and add it to `hash_array`
+hash_array=()
+while read LINE
+do
+    rngName=$(shuf -i 10000-99999 -n 1)
+    hash_name=$(printf ${rngName}${LINE} | sha256sum)
+    hash_array+=($rngName + $hash_name)
+done < names
+
+
+
+# RNG 
+# rngName=$(shuf -i 10000-99999 -n 1)
+
