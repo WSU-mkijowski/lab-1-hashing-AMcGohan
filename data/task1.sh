@@ -1,4 +1,4 @@
-#!/bin/bash
+ #!/bin/bash
 
 # 1. Take first unique identifier (AMcGohan for example) and create a 5 digit RNG string and
 # add it to the beginning of the identifier.

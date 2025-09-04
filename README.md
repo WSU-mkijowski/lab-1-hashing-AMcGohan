@@ -62,19 +62,36 @@ Answer the following:
 hash)
 
 ```
-
+90Abram's - 00007aa463d98d1af01ed0e6a950b317fdcbac348d324c017e1ca5f5588b7304
+826Ahab's - 00000dc8e20956a67176622af35b4f995d286049a99e5402b1228f54e14ef6de
 ```
 
 * How many words were in your dictionary?
+
+104344
+
 * How many nonces did your code iterate over?
+
+990
+
 * What was the maximum number of hashes your code *could* compute given the above?
+
+103,300,560
+
 * What did you think about Task 2?
+
+It was a lot simpler than Task 1, but took longer to compile.
+
 * Is there a better way than brute force to attempt to get higher valued coins?
 * Why or why not?
+
+No because the hashes that are created from the nonce+word and hash is pseudo-random
 
 
 ```bash
 please put any cool bash one-liners or other piped commands you
 learned/struggled with for task 2 here
+
+if [[ $hash_word =~ ^[0]{4} ]]; then
 ```
 
