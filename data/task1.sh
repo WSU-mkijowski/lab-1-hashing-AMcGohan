@@ -13,19 +13,33 @@
 cat quiz_data.csv | awk -F ',' '{ print $1}' | uniq > names
 
 #Take LINE and add the RNG number before it, hash it, then add the same number before the new hash and add it to `hash_array`
+name_array=()
 hash_array=()
 while read LINE
 do
     rngName=$(shuf -i 10000-99999 -n 1)
     hash_name=$(printf ${rngName}${LINE} | sha256sum)
     hash_array+=(${rngName}${hash_name})
+    name_array+=(${LINE})
 done < names
 
-printf "%s\n" "${hash_array[@]}"
+# remove file 'names'
+rm names
 
+# printf "%s\n" "${hash_array[@]}"
+
+# Remove '-' from each hash
 for i in "${!hash_array[@]}"
 do
     hash_array[$i]="${hash_array[$i]//-/}"
 done
 
-printf "%s\n" "${hash_array[@]}"
+# Copy quiz_data.csv to salted-data.csv
+cp quiz_data.csv salted-data.csv
+
+# Replace all instance of identifier with its hash
+for i in "${!name_array[@]}"
+do
+    sed -i "s/${name_array[$i]}/${hash_array[$i]}/g" salted-data.csv
+done
+
