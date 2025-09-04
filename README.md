@@ -14,17 +14,39 @@ Answer the following in this file:
 42, I used `cat quiz_data.csv | awk -F "," '{print $1}' | uniq | wc -l` to print number of unique users, and subtract 1 for FLastName
 
 * How many salts did you create?
+
+There are 42 salts that I created, each randomly made for each unique user.
+
 * How many possible combinations will I need to try to figure out the secret ID
   of all students (assume I know all potential secret IDs and have your 
   `salted-data.csv`)
+
+`1.4809376465435122258790507146098e+68`
+I got this answer by multiplying all possible combinations of a hash (64^35, where 64 = length of hash and 35 = 9 numbers + 26 letters) with the possible combinations that the salt could be (Between 10,000 - 99,999, so 89,999 possible salts).
+
 * Instead of salts, if you were to use a nonce (unique number for each hashed
   field) how many possible combinations would I need to try?
+  
+  Same possible combinations as previous question.
+
 * Given the above, if this quiz data were *actual* class data, say for example
   your final exam, how would you store this dataset?  Why?
+
+  I would store the dataset in a database that only the instructor of the course and the faculty that are above the instructor can access with hashed values of the students names that each faculty would have to store locally to help prevent any potential leaks.
 
 ```bash
 please put any cool bash one-liners or other piped commands you
 learned/struggled with for task 1 here
+
+while read LINE
+do
+    rngName=$(shuf -i 10000-99999 -n 1)
+    hash_name=$(printf ${rngName}${LINE} | sha256sum)
+    hash_array+=(${rngName}${hash_name})
+    name_array+=(${LINE})
+done < names
+
+sed -i "s/${name_array[$i]}/${hash_array[$i]}/g" salted-data.csv
 ```
 
 ---
