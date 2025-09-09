@@ -12,7 +12,7 @@ do
   for i in $(seq 10 1000); do
     hash_word=$(printf ${i}${LINE} | sha256sum)
 
-    if [[ $hash_word =~ ^[0]{5} ]]; then
+    if [[ $hash_word =~ ^[0]{3} ]]; then
       number=$i
       word=$LINE
     break 2
